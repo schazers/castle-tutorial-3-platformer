@@ -23,8 +23,8 @@ local function resetGame()
   player.width = 32
   player.height = 32
   player.x = GAME_WIDTH / 2 + player.width / 2
-	player.y = GAME_HEIGHT / 2
-	player.y_velocity = -5
+  player.y = GAME_HEIGHT / 2
+  player.y_velocity = -5
   player.jump_initial_velocity = -600
 
   -- clear all enemies
@@ -32,45 +32,45 @@ local function resetGame()
     enemies[enemy] = nil
   end
 end
- 
+
 function love.load()
   math.randomseed(os.time())
 
-	ground.width = GAME_WIDTH
-	ground.height = 0.1 * GAME_HEIGHT
- 
-	ground.x = 0
+  ground.width = GAME_WIDTH
+  ground.height = 0.1 * GAME_HEIGHT
+
+  ground.x = 0
   ground.y = GAME_HEIGHT - 0.1 * GAME_HEIGHT
-  
+
   resetGame()
 end
- 
+
 function love.update(dt)
-	if love.keyboard.isDown('d') or love.keyboard.isDown('right') then
+  if love.keyboard.isDown("d") or love.keyboard.isDown("right") then
     player.x = player.x + (player.move_speed * dt)
     if player.x > GAME_WIDTH - player.width then
       player.x = GAME_WIDTH - player.width
     end
-	elseif love.keyboard.isDown('a') or love.keyboard.isDown('left') then		
-		player.x = player.x - (player.move_speed * dt)
+  elseif love.keyboard.isDown("a") or love.keyboard.isDown("left") then
+    player.x = player.x - (player.move_speed * dt)
     if player.x < 0 then
       player.x = 0
     end
   end
- 
-	if love.keyboard.isDown('w') or love.keyboard.isDown('up') then
-		if player.y_velocity == 0 then
-			player.y_velocity = player.jump_initial_velocity
-		end
+
+  if love.keyboard.isDown("w") or love.keyboard.isDown("up") then
+    if player.y_velocity == 0 then
+      player.y_velocity = player.jump_initial_velocity
+    end
   end
-  
-	if player.y_velocity ~= 0 then
-		player.y = player.y + player.y_velocity * dt
-		player.y_velocity = player.y_velocity - GRAVITY * dt
-	end
- 
-	if player.y + player.height > ground.y then
-		player.y_velocity = 0
+
+  if player.y_velocity ~= 0 then
+    player.y = player.y + player.y_velocity * dt
+    player.y_velocity = player.y_velocity - GRAVITY * dt
+  end
+
+  if player.y + player.height > ground.y then
+    player.y_velocity = 0
     player.y = ground.y - player.height
   end
 
@@ -83,13 +83,13 @@ function love.update(dt)
       enemy.x = enemy.x + enemy.xVelocity * dt
 
       -- handle collisions with player
-      if(enemy.x < player.x + player.width and 
-        enemy.x + ENEMY_WIDTH > player.x and
-        enemy.y < player.y + player.height and 
-        enemy.y + ENEMY_HEIGHT > player.y) then
+      if
+        (enemy.x < player.x + player.width and enemy.x + ENEMY_WIDTH > player.x and enemy.y < player.y + player.height and
+          enemy.y + ENEMY_HEIGHT > player.y)
+       then
         resetGame()
-      end 
-      
+      end
+
       -- remove enemies when they go offscreen
       if (enemy.x < 0) then
         num_enemies_cleared = num_enemies_cleared + 1
@@ -121,13 +121,13 @@ function love.update(dt)
     end
 
     enemies[#enemies + 1] = {
-      x = enemyX, 
+      x = enemyX,
       y = enemyY,
       xVelocity = enemyVelocityX
     }
   end
 end
- 
+
 function love.draw()
   -- center game within castle window
   love.graphics.push()
@@ -137,21 +137,21 @@ function love.draw()
 
   -- player
   love.graphics.setColor(1.0, 0.4, 0.4, 1.0)
-  love.graphics.rectangle('fill', player.x, player.y, player.width, player.height)
+  love.graphics.rectangle("fill", player.x, player.y, player.width, player.height)
 
   -- enemies
   love.graphics.setColor(0.4, 1.0, 0.4, 1.0)
   for i = 1, #enemies do
-    love.graphics.rectangle('fill', enemies[i].x, enemies[i].y, ENEMY_WIDTH, ENEMY_HEIGHT)
+    love.graphics.rectangle("fill", enemies[i].x, enemies[i].y, ENEMY_WIDTH, ENEMY_HEIGHT)
   end
 
   -- ground
   love.graphics.setColor(0.3, 0.3, 0.5, 1.0)
-  love.graphics.rectangle('fill', ground.x, ground.y, ground.width, ground.height)
+  love.graphics.rectangle("fill", ground.x, ground.y, ground.width, ground.height)
 
   -- frame
   love.graphics.setColor(1.0, 1.0, 1.0, 1.0)
-  love.graphics.rectangle('line', 0, 0, GAME_WIDTH, GAME_HEIGHT)
+  love.graphics.rectangle("line", 0, 0, GAME_WIDTH, GAME_HEIGHT)
 
   -- score
   love.graphics.setColor(1, 1, 1, 1)

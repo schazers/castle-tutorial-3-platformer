@@ -129,6 +129,9 @@ function love.draw()
   gTranslateScreenToCenterDx = 0.5 * (love.graphics.getWidth() - GAME_WIDTH)
   gTranslateScreenToCenterDy = 0.5 * (love.graphics.getHeight() - GAME_HEIGHT)
   love.graphics.translate(gTranslateScreenToCenterDx, gTranslateScreenToCenterDy)
+  love.graphics.setScissor(
+      gTranslateScreenToCenterDx, gTranslateScreenToCenterDy,
+      GAME_WIDTH + 1, GAME_HEIGHT + 1)
 
   -- player
   love.graphics.setColor(1.0, 0.4, 0.4, 1.0)

@@ -90,7 +90,7 @@ function love.update(dt)
     end
 
     -- remove enemies when they go offscreen
-    if (enemy.x < 0) then
+    if (enemy.x + ENEMY_WIDTH < 0) then
       num_enemies_cleared = num_enemies_cleared + 1
       table.remove(enemies, i)
     end

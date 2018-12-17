@@ -1,4 +1,4 @@
--- Castle Example: Platformer (Part 1)
+-- Castle Example: Platformer
 -- http://www.playcastle.io
 
 local GAME_WIDTH = 768

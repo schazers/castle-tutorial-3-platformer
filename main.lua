@@ -9,13 +9,12 @@ local GRAVITY = -2000
 local ground = {}
 local player = {}
 local enemies = {}
+local num_enemies_cleared
 
 local ENEMY_WIDTH = 12
 local ENEMY_HEIGHT = ENEMY_WIDTH
 local ENEMY_SPEED = 300
 local ENEMY_SPAWN_RATE = 1.0
-
-local num_enemies_cleared = 0
 
 local function resetGame()
   num_enemies_cleared = 0
@@ -77,29 +76,23 @@ function love.update(dt)
   end
 
   -- update existing enemies
-  for i = 1, #enemies do
+  for i = #enemies, 1, -1 do
     local enemy = enemies[i]
-    if enemy == nil then
-      -- do nothing: we're here because we already removed an enemy during this loop
-    else
-      enemy.x = enemy.x + enemy.xVelocity * dt
+    enemy.x = enemy.x + enemy.xVelocity * dt
 
-      -- handle collisions with player
-      if
-        (enemy.x < player.x + player.width and enemy.x + ENEMY_WIDTH > player.x and enemy.y < player.y + player.height and
-          enemy.y + ENEMY_HEIGHT > player.y)
-       then
-        resetGame()
-      end
+    -- handle collisions with player
+    if
+      (enemy.x < player.x + player.width and enemy.x + ENEMY_WIDTH > player.x and enemy.y < player.y + player.height and
+        enemy.y + ENEMY_HEIGHT > player.y)
+     then
+      resetGame()
+      return
+    end
 
-      -- remove enemies when they go offscreen
-      if (enemy.x < 0) then
-        num_enemies_cleared = num_enemies_cleared + 1
-        table.remove(enemies, i)
-        if i ~= #enemies then
-          i = i - 1
-        end
-      end
+    -- remove enemies when they go offscreen
+    if (enemy.x < 0) then
+      num_enemies_cleared = num_enemies_cleared + 1
+      table.remove(enemies, i)
     end
   end
 

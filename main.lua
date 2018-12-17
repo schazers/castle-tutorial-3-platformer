@@ -15,6 +15,8 @@ local ENEMY_HEIGHT = ENEMY_WIDTH
 local ENEMY_SPEED = 300
 local ENEMY_SPAWN_RATE = 1.0
 
+local num_enemies_cleared = 0
+
 local function resetGame()
   num_enemies_cleared = 0
 

@@ -2,6 +2,6 @@
 main: main.lua
 name: Platformer
 username: schazers
-coverImageUrl: https://raw.githubusercontent.com/schazers/castle-tutorial-3-platformer/master/logo.png
+coverImage: logo.png
 description: A simple platformer example for Castle.
 

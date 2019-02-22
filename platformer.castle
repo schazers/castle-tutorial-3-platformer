@@ -1,7 +1,8 @@
 ---
 main: main.lua
-name: Platformer
-username: schazers
+title: Platformer
+owner: schazers
+primaryColor: 00001e
 coverImage: logo.png
 description: A simple platformer example for Castle.
 
